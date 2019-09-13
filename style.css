@@ -1,0 +1,657 @@
+/* 
+Уважаемые Skillbox!
+В моем коде возможны повторения свойств, ненужные классы/id и т.д. Где увидел - убрал (в основном это в конце кода :) ). 
+Также я решил не делать header и navigation с помощью тегов <header> и <nav>, т.к. мне привычнее писать через кхм-кхм - <div> - кхм. 
+Зато в моем коде присутствуют комментарии и я старался называть классы/id более-менее понятными словами, подходящими по смыслу.
+Я обучаюсь в колледже на специальности "Информационные системы и программирование" и пришел на Ваш интенсив, чтобы почерпнуть для себя что-то новое, неизведанное 
+(хотя что я мог изведать на 2 курсе подмосковного колледжа?). 
+Надеюсь, что 2 день интенсива пройдет в более спокойной обстановке, так как PHP - язык довольно простой, 
+но общение с БД с его помощью довольно трудно понимать с первого раза. Поэтому мне было бы приятнее, если бы на каждой функции мы останавливались подробнее)
+СПАСИБО ЗА ВНИМАНИЕ!
+*/
+
+html, body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	font-family: 'Arial';
+	/*font-family: 'Caveat', cursive;*/
+}
+
+@media all and (max-width: 1215px) {
+	html, body {
+		margin: 0px;
+		padding: 0px;
+		height: 100%;
+		font-family: 'Arial';
+	}
+}
+
+#pop-up-container { /*позиционирование окошка от #callback*/
+	position: absolute;
+	top: 0%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	justify-content: center;
+	overflow: hidden;
+	align-items: center;
+	background-color: rgba(210, 210, 210, 0.57);
+}
+
+#pop-up { /*стили для окошка от #callback*/
+	background-color: white;
+	width: 350px;
+	height: 350px;
+}
+
+#pop-up h1 {
+	width: 100%;
+	text-align: center;
+}
+
+input {
+	margin-bottom: 7px; 
+	margin-left: 20%;
+	border: 1px solid silver;
+	outline: none;
+	padding: 15px 10px;
+}
+
+#login {
+	margin-top: 5%;
+}
+
+#zakazat_proekt {
+	border: 1px solid #FF5D00;
+	color: white;
+	font-size: 14px;
+	outline: none;
+	padding: 15px 42px;
+	transition: all 0.5s;
+	background-color: #FF823A;
+}
+
+#zakazat_proekt:hover {
+	border: 1px solid pink;
+	background-color: #DA743A;
+}
+
+#agreement {
+	width: 60%;
+	margin-top: -6%;
+	margin-left: 25%;
+	color: grey;
+	font-size: 15px;
+}
+
+#header { /*стили для навигационного меню+блока с информацией обо мне*/
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-image: linear-gradient(to top, #1d1d1d07 , white);
+	background-color: #1d1d1d20;
+}
+
+.block { /*стили для верхнего меню*/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+@media all and (max-width: 1215px){
+	.block { /*стили для верхнего меню*/
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+}
+
+.left_nav {
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 0px;
+}
+
+a.nav { /*стили для кнопочек портфолио, стоимость, услуги*/
+	margin-right: 15px;
+	text-decoration: none;
+	color: black;
+	transition: all 0.4s;
+	font-size: 18px;
+}
+
+a.nav:hover { /*стили для ховера кнопочек портфолио, стоимость, услуги*/
+	color: #FF573D;
+	border-bottom: 1px solid #FF823A;
+	padding-bottom: 5px;
+	transition: all 0.4s;
+}
+
+.info { /*стили для правого навигационного меню*/
+	display: flex;
+	align-items: center;
+	padding: 0px;
+}
+
+#tel_number { /*стили для номера телефона*/
+	display: block;
+	color: black;
+	font-size: 21px;
+	font-family: 'Dancing Script', cursive;
+	font-weight: bold;
+	text-decoration: none;
+	margin-right: 20px;
+	transition: all 0.7s;
+}
+
+#callback { /*стили для кнопки заказть звонок*/
+	display: block;
+	text-align: center;
+	border: 2px solid pink;
+	color: #FF573D;
+	font-size: 19px;
+	padding: 5px 30px;
+	transition: all 0.5s;
+	background-color: white;
+}
+
+#callback:hover { /*стили для ховера кнопки заказть звонок*/
+	transition: all 0.5s;
+	color: white;
+	background-color: #FF573D;
+	cursor: pointer;
+}
+
+.intro { /*стили для блока с информацией обо мне*/
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-start;
+	justify-content: center;
+	background-image: url('img/B6oGSRjbj9I.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: 50% 10%;
+	padding: 10% 7%;
+	height: 15%;
+}
+
+@media all and (max-width: 1090px) {
+	.intro { /*стили для блока с информацией обо мне*/
+		display: flex;
+		flex-flow: column wrap;
+		align-items: flex-start;
+		justify-content: center;
+		background-image: url('img/B6oGSRjbj9I.jpg');
+		background-size: 40%;
+		background-repeat: no-repeat;
+		background-position: 90% 100%;
+		padding: 10% 7%;
+		height: 15%;
+	}
+}
+
+
+.intro h1 { /*стили для имени фамилии*/
+	margin-bottom: -10px;
+	margin-top: 0px;
+	font-size: 45px;
+
+}
+
+.intro h3 { /*стили для профессии*/
+	font-weight: normal;
+	color: #5A5A5A;
+	font-size: 25px;
+}
+
+.look_more { /*стили для кнопки узнать больше*/ 
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #FF823A;
+	color: white;
+	font-size: 15px;
+	padding: 7px 0px;
+	transition: all 0.5s;
+	background-color: #FF823A;
+	margin: 0 auto;
+	width: 20%;
+}
+
+@media all and (max-width: 1215px){
+	.look_more { /*стили для кнопки узнать больше*/ 
+		display: block;
+		text-align: center;
+		text-decoration: none;
+		border: 1px solid #FF823A;
+		color: white;
+		font-size: 15px;
+		padding: 10px 15px;
+		transition: all 0.5s;
+		background-color: #FF823A;
+		margin: 2% auto;
+		width: 30%;
+	}
+}
+
+.look_more:hover{ /*стили для ховера кнопки узнать больше*/ 
+	border: 1px solid pink;
+	padding: 10px 30px;
+	cursor: pointer;
+	background-color: #FF5D00;
+	color: white;
+}
+
+.what_can_i_do {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+
+.what_can_i_do {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+.what, .pictures { /*стили для списка того, что я могу сделать*/
+	list-style-type: none;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+}
+
+.what_can_i_do{
+	margin-bottom: 3%;
+}
+
+.tools {
+	list-style-type: none;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	margin-bottom: 3%;
+}
+
+@media all and (max-width: 1215px){
+	.tools { /*стили для списка того, что я могу сделать*/
+		list-style-type: none;
+		display: flex;
+		flex-flow: column nowrap;
+		justify-content: space-around;
+		align-items: center;
+		margin-bottom: 3%;
+	}
+}
+
+.tools li {
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	margin-top: 3%;
+}
+
+@media all and (max-width: 1215px){
+	.tools li {
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+		justify-content: center;
+		margin-top: 3%;
+	}
+}
+
+.tools p {
+	text-align: center;
+	margin: 0;
+	margin-left: 10%;
+	font-size: 16px;
+	font-style: italic;
+	color: #8993ad;
+	transition: all 0.2s;
+}
+
+@media all and (max-width: 1215px){
+	.tools p {
+		display: block;
+		text-align: left;
+		font-size: 14px;
+		color: #8993ad;
+		transition: all 0.2s;
+	}
+}
+
+.tools p:hover {
+	color: #60687E; 
+	transition: all 0.2s;
+	cursor: default;
+}
+
+.tools img {
+	transition: all 0.3s;
+}
+
+.tools img:hover {
+	transform: scale(1.05);
+	transition: all 0.3s;
+	margin-bottom: 5%;
+}
+
+.examples {
+	background-image: linear-gradient(to top, white, #1d1d1d07 , white);
+	background-color: #1d1d1d20;
+}
+
+.examples h1 {
+	margin: 0 auto;
+}
+
+.what_can_i_do h1 {
+	margin: 2% auto;
+}
+
+.what_can_i_do h1, .examples h1 { /*стили заголовков "что я делаю" и "примеры моих работ"*/
+	text-align: center;
+	margin-bottom: 2%;
+}
+
+#know_price:hover{ /*стили для ховера кнопки "узнать стоимость"*/
+	border: 1px solid pink;
+	padding: 10px 15px;	
+	cursor: pointer;
+}
+
+#zakaz:hover { /*стили для ховера кнопки "заказать проект"*/
+	border: 1px solid pink;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+@media all and (max-width: 1215px){
+	ul.pictures>li>a {
+		font-size: 15px;
+	}
+}
+
+
+div.examples { /*стили для контейнера примеров моих работ*/
+	margin-bottom: 3%
+}
+
+.examples ul { /*стили для списка примеров моих работ */
+	margin-bottom: 3%;
+}
+
+#callback_2 {
+	display: block;
+	width: 20%;
+	margin: 0 auto;
+}
+
+@media all and (max-width: 1280px) {
+	#callback_2 {
+		width: 20%;
+	}
+}
+
+
+.pictures { /*стили для скриншотов примеров моих работ*/
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
+	align-items: center;
+	padding-left: 0;
+}
+
+.pictures li {
+	width: 15%;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+}
+
+@media all and (max-width: 1215px){
+	.pictures li {
+		width: 15%;
+	}
+}
+
+.pictures a {
+	text-align: center;
+	text-decoration: none;
+	color: #8993ad;
+	transition: all 0.2s;
+	font-size: 25px;
+}
+
+.pictures a:hover {
+	color: #60687E; 
+	transition: all 0.2s;
+}
+
+.pictures img {
+	width: 100%;
+	border-radius: 10px;
+	margin-bottom: 2%;
+	transition: all 0.9s;
+}
+
+.pictures img:hover {
+	transform: scale(1.05);
+	transition: all 0.9s;
+	margin-bottom: 5%;
+}
+
+.banner { /*стили для моих условий выполнения работы*/
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	background-color: #FF5D00;
+	padding: 40px 80px;
+}
+
+.banner p { /*стили для абзацев внутри баннера*/
+	color: white;
+}
+
+p#reklama { /*стили для основно текста внутри баннера*/
+	font-size: 40px;
+	margin-bottom: 1.5%;
+}
+
+p#snoska { /*стили для сноски внутри баннера*/
+	display: flex;
+	justify-content: flex-start;
+	font-size: 20px;
+	margin-top: 0%;
+	width: 80%;
+}
+
+.footer { /*стили для футера*/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	background-image: linear-gradient(to right, white, #1d1d1d07 , white);
+	background-color: #1d1d1d20;
+}
+
+.navigation, .feedback { /*стили для левой и средней менюшки*/
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-left: 0;
+}
+
+@media all and (max-width: 1215px){
+	.navigation>li>a {
+		font-size: 15px;
+	}
+}
+
+.navigation li {
+	margin-bottom: 10%;
+}
+
+.feedback li { /*стили для списка среденей менюшки*/
+	display: block;
+	margin-bottom: 20px;
+}
+
+.feedback img { /*стили изображений средней менюшки*/
+	margin-right: 10px;
+}
+
+@media all and (max-width: 1215px){
+	.feedback>li>a {
+		font-size: 18px;
+	}
+}
+
+a.footer_nav { /*стили для кнопочек портфолио, стоимость, услуги в футере*/
+	text-decoration: none;
+	color: black;
+	transition: all 0.4s;
+	font-size: 19px;
+}
+
+a.footer_nav:hover { /*стили для ховера кнопочек портфолио, стоимость, услуги в футере*/
+	color: #FF573D;
+	transition: all 0.4s;
+	border-bottom: 1px solid #FF573D;
+	padding-bottom: 5px;
+}
+
+.footer_tel_num { /*стили для номера телефона в средней менюшке*/
+	text-decoration: none;
+	color: black;
+	transition: all 0.7s;
+}
+
+.footer_email { /*стили для мыла в средней менюшке*/
+	text-decoration: none;
+	color: black;
+	margin-top: 20px;
+}
+
+#footer_callback { /*стили для кнопки заказть звонок*/
+	display: block;
+	text-align: center;
+	border: 2px solid pink;
+	color: #FF573D;
+	font-size: 19px;
+	padding: 5px 30px;
+	transition: all 0.5s;
+	background-color: white;
+}
+
+#footer_callback:hover { /*стили для ховера кнопки заказть звонок*/
+	transition: all 0.5s;
+	color: white;
+	background-color: #FF573D;
+	cursor: pointer;
+}
+
+.right { /*стили для контейнера правой менюшки*/
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.right1 { /*стили для списка соц.сетей правой менюшки*/
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 10%;
+	padding-left: 0;
+}
+
+#vk {
+	width: 35px; 
+	height: 21px;
+	transition: all 0.5s;
+}
+
+#vk:hover {
+	opacity: 0.7;
+	transition: all 0.5s;
+}
+
+#facebook {
+	width: 16px; 
+	height: 28px;
+	transition: all 0.3s;
+}
+
+#facebook:hover {
+	opacity: 0.7;
+	transition: all 0.3s;
+}
+
+#twitter {
+	width: 29px; 
+	height: 25px;
+	transition: all 0.3s;
+}
+
+#twitter:hover {
+	opacity: 0.7;
+	transition: all 0.3s;
+}
+
+#instagram {
+	width: 25px; 
+	height: 25px;
+	transition: all 0.3s;
+}
+
+#instagram:hover {
+	opacity: 0.7;
+	transition: all 0.3s;
+}
+
+.right1 a {
+	display: block;
+}
+
+.right1 img {
+	width: 100%;
+	height: 100%;
+}
+
+.footer_pic { /*стили для иконок списка соц.сетей правой менюшки*/
+	margin-right: 20px;
+}
+
+.copyright { /*стили для блока копирайта*/
+	background-color: #272834;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+
+.copyright p { /*стили для текста внутри блока копирайта*/
+	font-family: 'Arial';
+	font-size: 15px;
+	text-align: center;
+	color: #ffffff9c;
+}
+
+/*#F0F0F0*/
