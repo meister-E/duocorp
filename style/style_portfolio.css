@@ -4,10 +4,35 @@
 
 html, body {
 	height: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 div.wrapper {
-	background-image: url('img/background.jpg');
+	background-image: url('../img/bg/background.jpg');
+}
+
+.top {
+	display: block;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 5;
+	background-color: #ff823a;
+	opacity: 0.75;
+	text-decoration: none;
+	padding: 10px  7px;
+	color: white;
+	border-radius: 0px 10px 10px 0px;
+	transition: all 0.2s;
+	font-size: 15px;
+}
+
+.top:hover {
+	padding: 10px 30px;
+	background-color: #ff5d00;
+	transition: all 0.2s;
+	opacity: 1;
 }
 
 section.wrapper {
@@ -15,21 +40,34 @@ section.wrapper {
 	flex-flow: row nowrap;
 	justify-content: center;
 	align-items: flex-start;
+	background-image: url('../img/avatars/MvdyXmNVdz0.jpg');
+	background-repeat: no-repeat;
+	background-size: 22%;
+	background-position: 50% 3%;
 }
 
+.portfolio {
+	margin-top: 14.8%;
+}
 
-.look_more { /*стили для кнопки узнать больше*/ 
-	display: block;
-	text-align: center;
-	text-decoration: none;
-	border: 1px solid #FF823A;
-	color: white;
-	font-size: 15px;
-	padding: 7px 0px;
-	transition: all 0.5s;
-	background-color: #FF823A;
-	margin: 0 auto;
-	width: 20%;
+.left_table {
+	transition: all .3s;
+}
+
+.left_table:hover {
+	color: #405562;
+	transition: all .3s;
+	cursor: default;
+}
+
+.right_table {
+	transition: all .3s;
+}
+
+.right_table:hover {
+	color: #405562;
+	transition: all .3s;
+	cursor: default;
 }
 
 @media all and (max-width: 1215px){
@@ -43,8 +81,7 @@ section.wrapper {
 		padding: 10px 15px;
 		transition: all 0.5s;
 		background-color: #FF823A;
-		margin: 2% auto;
-		width: 30%;
+		margin: 4% auto;
 	}
 }
 
@@ -115,19 +152,34 @@ a.footer_nav:hover { /*стили для ховера кнопочек порт�
 
 .footer_tel_num { /*стили для номера телефона в средней менюшке*/
 	text-decoration: none;
-	color: black;
-	transition: all 0.7s;
+	color: white;
+	font-weight: bold;
+	transition: all 0.4s;
+}
+
+.footer_tel_num:hover {
+	color: #FF573D;
+	transition: all 0.4s;
 }
 
 .footer_email { /*стили для мыла в средней менюшке*/
 	text-decoration: none;
-	color: black;
+	color: white;
+	font-weight: bold;
 	margin-top: 20px;
+	transition: all 0.4s;
 }
+
+.footer_email:hover {
+	color: #FF573D;
+	transition: all 0.4s;
+}
+
 
 #footer_callback { /*стили для кнопки заказть звонок*/
 	display: block;
 	text-align: center;
+	text-decoration: none;
 	border: 2px solid pink;
 	color: #FF573D;
 	font-size: 19px;

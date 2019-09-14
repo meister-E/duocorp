@@ -2,8 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="refresh" content="30;URL=index.php">
 	<link rel="shortcut icon" href="iconfinder_Apply_132742.png" type="image/png">
+	<meta http-equiv='refresh' content='30;index.php'>
 	<title>Подтверждение заказа</title>
 
 	<style>
@@ -60,36 +60,36 @@
 		
 		require_once 'connection.php';
 		
-		if(isset($_POST['name']) && ($_POST['telefon'])){ 
-	    // подключаемся к серверу
-	    $link = mysqli_connect($host, $user, $password, $db_name) 
-	    or die("Ошибка 1" . mysqli_error($link));
+		if(isset($_POST['name']) && ($_POST['telefon']) && ($_POST['email'])) { 
 
-	    // экранирование символов для mysql
-	    $name = htmlentities(mysqli_real_escape_string($link, $_POST['name'])); 
+		    // экранирование символов для mysql
+		    $name = htmlentities(mysqli_real_escape_string($link, $_POST['name'])); 
 
-	    // экранирование символов для mysql
-	    $telefon = htmlentities(mysqli_real_escape_string($link, $_POST['telefon']));   
-	    
-	    // создание строки запроса
-		$query ="INSERT INTO callbacks VALUES(NULL, '$name', NOW(), '$telefon')";
-		
-		// выполняем запрос
-	    $result = mysqli_query($link, $query) or die("Ошибка 2" . mysqli_error($link));
+		    // экранирование символов для mysql
+		    $telefon = htmlentities(mysqli_real_escape_string($link, $_POST['telefon']));
 
-	    if ($result) {
-	    	echo "<p class='success'>Ваш заказ принят! Скоро с Вами свяжутся! Через 30 секунд вы будете перемещны на главную страницу!<p>";
-	    }
-	    else {
-	    	echo "<p class='error'>Произошла ошибка " . mysqli_error () . "</p>";
-	    }
+		    $email = htmlentities(mysqli_real_escape_string($link, $_POST['email'])); 
+		    
+		    // создание строки запроса
+			$query ="INSERT INTO callbacks VALUES(NULL, '$name', NOW(), '$telefon', '$email')";
+			
+			// выполняем запрос
+		    $result = mysqli_query($link, $query) or die("Ошибка 2" . mysqli_error($link));
 
-	    // закрываем подключение
-	    mysqli_close($link);
+		   /* $mail = mail("bychkov.l47@mail.ru", "Заявка с сайта", "Имя: " .$name. "E-mail: " .$email. "Телефон: " .$telefon, "From: " .$email. "\r\n");*/
+
+		    if ($result) {
+		    	echo "<p class='success'>Ваш заказ принят! Скоро с Вами свяжутся! Через 30 секунд вы будете перемещны на главную страницу!</p>";
+		    	echo "<a href='index.php' class='redirect'>Вернуться на главную</a>";
+		    }
+		    else {
+		    	echo "<p class='error'>Произошла ошибка " . mysqli_error () . "</p>";
+		    }
+
+		    // закрываем подключение
+		    mysqli_close($link);
 
 		}
 	?>
-
-	<a href="index.php" class="redirect">Вернуться на главную</a>
 </body>
 </html>
